@@ -19,7 +19,7 @@ Ever heard of the ".com bubble"? Yeah, it was basically a huge market crash in t
 
 ![One does not simply HTML tables]({{site.url}}/assets/html_tables_meme.png)
 
-Why is this? Well today we hardly think about the value of the internet and web, because it has soked itself into our everyday life, but back in the 90s things like mobile phones, computers and that you could order stuff online was friggin sci-fi level stuff. And it is. We do not think about how amazing these technologies are today, but it is increasingly harder to imagine a world without webservices and magic websites which can serve you personalized, highly accurate data every day, or give you magical powers and interaction with the world. The capabilities and the vision of the internet as the neural net connecting humanity as a single brain is scarily awesome. And stepping foot into web technology is today a bit more complex than before.
+Why is this? Well today we hardly think about the value of the internet and web, because it has soked itself into our everyday life, but back in the 90s things like mobile phones, computers and that you could order stuff online was friggin sci-fi level stuff. And it is. We do not think about how amazing these technologies are today, but it is increasingly harder to imagine a world without webservices and magic websites which can serve you personalized, highly accurate data every day, or give you magical powers and interaction with the world. The capabilities and the vision of the internet as the neural net connecting humanity as a single brain is scarily awesome. So... stepping foot into web technology is today a bit more complex than before.
 
 But fear not - We have Python.
 
@@ -38,7 +38,7 @@ There is a million ways to set up a server, but due to the simplicity and readab
 First we install python, you can follow the instructions in this link:
 https://wiki.python.org/moin/BeginnersGuide/Download
 
-and user pythons packagemanager pip to install pip:
+and use the python packagemanager pip to install pip:
 
 $ pip install flask
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Welcome to my developer blog"
-subtitle: "Things I learn, technology I think is fun, and some guides i guess"
+subtitle: "Things I learn, technology I think is fun - This is the place where I write"
 date: 2017-07-20
 author: Anders
 category: Jekyll
@@ -27,4 +27,4 @@ For my theme I found a simple minimalistic theme by by @itsbenjamin where I stri
 
 https://github.com/itisbenjamin/Nice_Blog
 
-And of course, thanks to github and the developers of jekyll 
+And of course, thanks to github and the developers of jekyll
