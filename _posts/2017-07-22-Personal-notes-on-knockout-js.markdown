@@ -2,7 +2,7 @@
 layout: post
 title: "Frontend with MVVM"
 subtitle: "Personal notes on using knockoutjs for the MVVM pattern on frontend development"
-date: 2017-07-21
+date: 2017-07-22
 author: Anders
 category: frontend
 tags: javascript web frontend
@@ -23,7 +23,7 @@ For example we may set an observable variable equal to an input field in our app
 **Sources for confusion:**
 - Observables are called like functions, eg: if meal attribute is an observable we may do:
   `meal().price` to get the price in our view or something
-- A good rule is to initiate the self variable when calling a class and using that instead of `this`. Like so: `var self = this;` self only changes then if you write code to change it, while this always points to the object it is called for, which may result in some issues
+- A good rule is to initiate the self variable when calling a class and using that instead of `this`. Like so: `var self = this;` - `self` only changes then if you write code to change it, while `this` always points to the object it is called for, which may result in some issues
 - When calling a `$root.function` from a foreach statement in the view, the current object will be passed as a parameter to the function from the view
 
 **Typical workflow:**
@@ -38,6 +38,7 @@ For example we may set an observable variable equal to an input field in our app
   * And we let our classes (for the data) have getters and setters as we desire
 
   This may be easier to explain with some psuedocode -> here for a class:
+
         Class seatReservation(name, meal){
           // Initial values
           self.name = name, self.meal=ko.observable(meal)
