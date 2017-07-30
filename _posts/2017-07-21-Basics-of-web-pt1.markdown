@@ -4,7 +4,7 @@ title: "Basics of web - Part 1: Web technology"
 subtitle: "An introduction to a series on web technology"
 date: 2017-07-21
 author: Anders
-category: webseries
+category: Web
 tags: python flask web
 finished: true
 ---
