@@ -11,7 +11,7 @@ finished: false
 
 ## Purpose of this blog
 
-This is my personal developer / engineering blog. As such, the utility of this blog is a tool for me to document different technologies as I work on them for myself, but also as a source of communication to others of what my capabilities are. I often find that I learn more when I write about what in this format, and its nice to have explanations from myself at a later time when I eventually forget details on the different subjects. The best teacher I can ever have is usually myself.
+This is my personal developer / engineering blog. As such, the utility of this blog is a tool for me to document different technologies as I work on them for myself, but also as a source of communication to others of what my capabilities are. I often find that I learn more when I write about it, and its nice to have explanations from myself at a later time when I eventually forget details on the different subjects. The best teacher I can ever have is often myself.
 
 **However** I hope you, dear reader, will find some value in what I write as well, and therefore I am building my blog in (what I think of as) a well structured and logical way, with a as good and efficient explanations as possible.
 
