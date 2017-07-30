@@ -4,7 +4,7 @@ title: "Basics of web - Part 2: MVVM with Knockout JS"
 subtitle: "Personal notes on using knockoutjs for the MVVM pattern on frontend development"
 date: 2017-07-22
 author: Anders
-category: frontend
+category: Web
 tags: javascript web frontend
 finished: true
 ---
