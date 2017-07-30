@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Welcome to my developer blog"
+title: "Hello, Jekyll!"
 subtitle: "Things I learn, technology I think is fun - This is the place where I write"
 date: 2017-07-20
 author: Anders

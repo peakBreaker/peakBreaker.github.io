@@ -5,13 +5,13 @@ subtitle: "Overview, models & texturing"
 date: 2017-07-25
 author: Anders
 category: Blender
-tags:
-finished: false
+tags: blender 3d modelling
+finished: true
 ---
 
 ## Ah, blender
 Blender is an open source 3D computer graphics software for creating pretty much whatever you can imagine in 3D.
-![Blender logo]({{site.url}}/assets/blender-logo.png)
+![Blender logo]({{site.url}}/assets/blender/blender-logo.png)
 
 It is a pretty awesome piece of software, entirely free, with a great amount of features for creating professional level content.  In the hands of a trained person the results can be quite astonishing. Just take a look at this short film made by the blender foundation itself:
 
@@ -42,25 +42,25 @@ To create a textured model there are basically 3 things we need to do:
 **Good stuff, lets begin**
 Allright, lets try to make this low poly tombstone to just get a grip of the basics:
 
-![Blender render]({{site.url}}/assets/blender1-1.png)
+![Blender render]({{site.url}}/assets/blender/blender1-1.png)
 
 #### Model:
 1. We can use the default cube when opening a new scene, or create a new cube by pressing **Shift-A** -> mesh -> cube
 2. To edit the cube object we enter edit mode by selecting the cube and pressing **Tab**
-3. At the lower part of the window you see this (see below) which will let you select vertex/edge/face ![Select vertex/edge/face]({{site.url}}/assets/blender1-2.png)
+3. At the lower part of the window you see this (see below) which will let you select vertex/edge/face ![Select vertex/edge/face]({{site.url}}/assets/blender/blender1-2.png)
 4. To make the model we select different vertecies/edges and faces and use **G** to move them about and **S** to scale the selections, and extrude new elements with **E** - You just have to try about things till you have what looks good.
 5. Finally you should have something that looks like this
-![Final mesh]({{site.url}}/assets/blender1-3.png)
+![Final mesh]({{site.url}}/assets/blender/blender1-3.png)
 
 #### Texturing & materials:
 
 1. First we gotta UV map our model. If you dont know what this is, google it and read abit on the wiki page for the subject. The first part of this in blender is to mark seams. Select edges (in edit mode), hit **CTRL-E** and mark seam. Seams are where our unwrapper cannot stitch our UV map.
 2. After getting our seams correct we can unwrap our model.  Select all vertecies/edges/faces on our model with **A** and hit **U** and -> Unwrap
-3. Bring up a pane with with UV/Image editor, add an image ![Adding a new texture image]({{site.url}}/assets/blender1-4.png)
+3. Bring up a pane with with UV/Image editor, add an image ![Adding a new texture image]({{site.url}}/assets/blender/blender1-4.png)
 4. One would typically check and alter the UV map with a checkerpattern now, but we will skip this step in this tut
-5. We will now add our material. Make sure you are using cycles render as the rendering engine (set this in upper right corner), go to the materials tab (see below), and create a new material. On the material, make sure you are using nodes. ![Materials tab]({{site.url}}/assets/blender-5.png)
-6. Enter node editor, add a Image Texture node with **SHIFT-A** -> Texture -> Image Texture and put the output to a diffuse shader node which has its output to the Material output. ![Node Editor]({{site.url}}/assets/blender1-6.png)
-7. We can now enter texture mode and start texturing our model! ![Texture painting]({{site.url}}/assets/blender1-7.png)
+5. We will now add our material. Make sure you are using cycles render as the rendering engine (set this in upper right corner), go to the materials tab (see below), and create a new material. On the material, make sure you are using nodes. ![Materials tab]({{site.url}}/assets/blender/blender1-5.png)
+6. Enter node editor, add a Image Texture node with **SHIFT-A** -> Texture -> Image Texture and put the output to a diffuse shader node which has its output to the Material output. ![Node Editor]({{site.url}}/assets/blender/blender1-6.png)
+7. We can now enter texture mode and start texturing our model! ![Texture painting]({{site.url}}/assets/blender/blender1-7.png)
 
 Now make the model like you want it
 

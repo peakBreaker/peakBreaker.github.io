@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Frontend with MVVM"
+title: "Basics of web - Part 2: MVVM with Knockout JS"
 subtitle: "Personal notes on using knockoutjs for the MVVM pattern on frontend development"
 date: 2017-07-22
 author: Anders
@@ -38,32 +38,37 @@ For example we may set an observable variable equal to an input field in our app
   * And we let our classes (for the data) have getters and setters as we desire
 
   This may be easier to explain with some psuedocode -> here for a class:
+{% highlight ruby %}
+Class seatReservation(name, meal){
+  // Initial values
+  self.name = name, self.meal=ko.observable(meal)
+  // Price calculated
+  self.price = ko.computed(function(){
+      price = self.meal().price
+      return price
+    })
+}
+{% endhighlight %}
 
-        Class seatReservation(name, meal){
-          // Initial values
-          self.name = name, self.meal=ko.observable(meal)
-          // Price calculated
-          self.price = ko.computed(function(){
-              price = self.meal().price
-              return price
-            })
-        }
+Next for our View Model:
 
-  Next for our View Model:
+{% highlight ruby %}
+Class ReservationViewModel(){
+  // declare the self attribute(do this in the above class too)
+  self = this;
+  // data from database
+  self.data = [{mealName: "nomnom", price:4321}]
+  // Editable data
+  self.seats = ko.observableArray[]
+  // Operators
+  self.addseats = function(){self.seats.push(name, data[0])}
+}
+{% endhighlight %}
 
-        Class ReservationViewModel(){
-          // declare the self attribute(do this in the above class too)
-          self = this;
-          // data from database
-          self.data = [{mealName: "nomnom", price:4321}]
-          // Editable data
-          self.seats = ko.observableArray[]
-          // Operators
-          self.addseats = function(){self.seats.push(name, data[0])}
-        }
+  Finally apply the bindings:
 
-    Finally apply the bindings:
+{% highlight ruby %}
+  `ko.applyBindings(new ReservationsViewModel());`
+{% endhighlight %}
 
-    `ko.applyBindings(new ReservationsViewModel());`
-
-  3. In our view we may now easily add and alter our model from the view by calling the appropriate codes in `data-bind=""`
+  * In our view we may now easily add and alter our model from the view by calling the appropriate codes in `data-bind=""`
