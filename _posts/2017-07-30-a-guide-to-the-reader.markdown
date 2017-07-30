@@ -35,7 +35,7 @@ Basically built upon my idea of how to fundamentally learn technology:
 
 ### What will I be writing about
 
-To keep structure to the blog, I am writing series about different subjects and technologies, where the first parts of the series will get into basics and later parts will increasingly focus on specifics. The different series can be found divided into groups under [categories]({{site.url}}/categories).
+To keep structure to the blog, I am writing series about different subjects and technologies, where the first parts of the series will get into basics and later parts will increasingly focus on specifics. The different series can be found divided into groups under [categories]({{site.url}}/category).
 
 The different series/categories I aim to cover on this blog are as following:
 
