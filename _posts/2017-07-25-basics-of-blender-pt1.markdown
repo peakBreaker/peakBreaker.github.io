@@ -5,7 +5,7 @@ subtitle: "Overview, models & texturing"
 date: 2017-07-25
 author: Anders
 category: Blender
-tags:
+tags: Blender 3D cgi
 finished: false
 ---
 
@@ -58,7 +58,7 @@ Allright, lets try to make this low poly tombstone to just get a grip of the bas
 2. After getting our seams correct we can unwrap our model.  Select all vertecies/edges/faces on our model with **A** and hit **U** and -> Unwrap
 3. Bring up a pane with with UV/Image editor, add an image ![Adding a new texture image]({{site.url}}/assets/blender1-4.png)
 4. One would typically check and alter the UV map with a checkerpattern now, but we will skip this step in this tut
-5. We will now add our material. Make sure you are using cycles render as the rendering engine (set this in upper right corner), go to the materials tab (see below), and create a new material. On the material, make sure you are using nodes. ![Materials tab]({{site.url}}/assets/blender-5.png)
+5. We will now add our material. Make sure you are using cycles render as the rendering engine (set this in upper right corner), go to the materials tab (see below), and create a new material. On the material, make sure you are using nodes. ![Materials tab]({{site.url}}/assets/blender1-5.png)
 6. Enter node editor, add a Image Texture node with **SHIFT-A** -> Texture -> Image Texture and put the output to a diffuse shader node which has its output to the Material output. ![Node Editor]({{site.url}}/assets/blender1-6.png)
 7. We can now enter texture mode and start texturing our model! ![Texture painting]({{site.url}}/assets/blender1-7.png)
 
