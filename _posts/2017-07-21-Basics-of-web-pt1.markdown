@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Web is cool"
-subtitle: "A series on web development with Python Flask - Part 1: Web"
+title: "Basics of web - Part 1: Web technology"
+subtitle: "An introduction to a series on web technology"
 date: 2017-07-21
 author: Anders
-category: webseries
+category: Web
 tags: python flask web
 finished: true
 ---
@@ -44,12 +44,12 @@ $ pip install flask
 
 {% highlight ruby %}
 
-from flask import Flask
-app = Flask(__name__)
+  from flask import Flask
+  app = Flask(__name__)
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+  @app.route("/")
+  def hello():
+      return "Hello World!"
 
 {% endhighlight %}
 
