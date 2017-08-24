@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Featured 1: Webapp using apis"
+title: "Featured pt1: Webapp using apis"
 subtitle: "A google maps and api based application"
 date: 2017-08-02
 category: Featured
@@ -14,7 +14,7 @@ Hello and welcome to this first featured post. My goal with these posts is just 
 
 My first featured application I showcase here features my maps app. My goal of the app was to fully utilize the features of the google maps api, and use this api in junction with at least one other api. I ended up with connecting the maps together with foursquare to get details about a location, such a phone numbers and websites, and use disqus to enable a comment thread on the site.
 
-You can find the sourcecode for the application at [GitHub](https://github.com/Andurshurrdurr/ScriptyJav) and a running demo at [gh-pages]({{site.url}}/ScriptyJav). Below I am writing abit about what Challanges I faced during development and what Ive learned.
+You can find the sourcecode for the application at [GitHub](https://github.com/peakbreaker/ScriptyJav) and a running demo at [gh-pages]({{site.url}}/ScriptyJav). Below I am writing abit about what Challanges I faced during development and what Ive learned.
 
 #### Technology
 For this webapp I am basing myself on the following technologies

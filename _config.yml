@@ -1,13 +1,13 @@
 # Site settings
-title: itsAnders
+title: peakbreaker
 name: Anders # your name
-email: andershurum@gmail.com # your email address
+email: peakbreaker.io@gmail.com # your email address
 description: >
     A Simple Jekyll Blog for myself. # this means to ignore newlines until "baseurl:"
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://andurshurrdurr.github.io" # the base hostname & protocol for your site
-twitter_username:  # your Twitter username
-github_username:  # your Github username
+url: "https://peakbreaker.com" # the base hostname & protocol for your site
+twitter_username: peakbreaker # your Twitter username
+github_username: peakbreaker # your Github username
 disqus_username:  # your disqus username
 
 
