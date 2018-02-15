@@ -1,19 +1,23 @@
 ---
-layout: default
-title: Page not Found
-permalink: /404.html
+layout: page
+title: 404
+sitemap:
+  exclude: 'yes'
+published: true
 ---
+<div class="page">
 
-<style>
+    <h2 class="go-home">
+    Error 404
+    </h2>
+    <h3 class="go-home">
+      I'm not sure how you got here, but you should head <a href="/">home</a>.
+    </h3>
 
-.index-content {
-	margin-top: 30%;
-	margin-bottom: 30%;
-	font-size: 18px;
-}
+</div>
 
-</style>
 
-<center>
-	<p class="index-content">Page not Found</p>
-</center>
+<!-- Adding the glitch effect -->
+<script>
+    document.getElementsByTagName('body')[0].classList.add('glitch');
+</script>
