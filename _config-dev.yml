@@ -6,10 +6,10 @@ description: > # this means to ignore newlines until "baseurl:"
     This is where I write my daily technology insights - Here you'll find tech,
     tuts and talk from my life as an engineer.
 
-baseurl: "localhost:4000/blog/"  # the subpath of your site, e.g. /blog
+baseurl: "/blog/"  # the subpath of your site, e.g. /blog
 url: "https://peakbreaker.com" # the base hostname & protocol for your site
 site-twitter: peakbreaker # your Twitter username
-social-twitter: @peakbreaker # add your Twitter handle
+social-twitter: peakbreaker # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-linkedin: anders-l-hurum # add your Linkedin handle
 social-github: peakbreaker # your Github username
@@ -17,8 +17,8 @@ social-email: peakbreaker.io@gmail.com # add your Email address
 
 # Author Settings
 author: Anders L. Hurum # add your name
-author-img: profile_portrait.jpg # add your photo
-about-author: I am a web developer focusing on front-end development. Always hungry to keep learning. # add description
+author-img: anders_profile.jpg # add your photo
+about-author: Software engineer currently focusing on embedded systems. Hoping to get a girlfriend as beautiful as my code # add description
 
 discus-identifier:  # your disqus username
 analytics: # Google Analytics
