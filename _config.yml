@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
     This is where I write my daily technology insights - Here you'll find tech,
     tuts and talk from my life as an engineer.
 
-baseurl: "/blog/"  # the subpath of your site, e.g. /blog
+baseurl: "/"  # the subpath of your site, e.g. /blog
 url: "https://peakbreaker.com" # the base hostname & protocol for your site
 site-twitter: peakbreaker # your Twitter username
 social-twitter: peakbreaker # add your Twitter handle
