@@ -21,7 +21,7 @@ author-img: anders_profile.jpg # add your photo
 about-author: Software engineer currently focusing on embedded systems. Hoping to get a girlfriend as beautiful as my code # add description
 
 discus-identifier: peakbreaker-blog # your disqus username
-analytics: UA-117107711-1 # Google Analytics
+analytics: UA-117207692-1 # Google Analytics
 
 # Build settings
 permalink: ':title/'
