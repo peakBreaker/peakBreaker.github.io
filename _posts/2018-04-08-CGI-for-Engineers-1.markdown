@@ -7,7 +7,7 @@ date: 2018-04-08
 author: Anders
 category: Blender
 tags: blender 3d modelling
-finished: false
+finished: true
 img: covers/blender.png
 ---
 ## Blender is great
@@ -48,7 +48,6 @@ Allright, lets try to make this low poly tombstone to just get a grip of the bas
 3. At the lower part of the window you see this (see below) which will let you select vertex/edge/face ![Select vertex/edge/face]({{site.baseurl}}/assets/img/blender/blender1-2.png)
 4. To make the model we select different vertecies/edges and faces and use **G** to move them about and **S** to scale the selections, and extrude new elements with **E** - You just have to try about things till you have what looks good.
 5. Finally you should have something that looks like this
-
 ![Final mesh]({{site.baseurl}}/assets/img/blender/blender1-3.png)
 
 #### Mapping, materials and texturing:
