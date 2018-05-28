@@ -51,13 +51,34 @@ To get started with using Oculus with Unity3D, one installs the OVR utilities. I
 **A quite frustrating issue** we ran into when porting from normal UI on the screen to OVR was the player clicked a button to answer a quiz question.  The next question would automatically be answered on the same spot that the previous question was answered.  At first I thought this was due to the player holding the button down for too long or that the UI switched to the next question too fast.  I applied a delay in order to wait for a second before showing the next question:
 
 ```
+// Added for the time delay
+public void Wait(float seconds, Action action)
+{
+    StartCoroutine(_wait(seconds, action));
+}
+IEnumerator _wait(float time, Action callback)
+{
+    yield return new WaitForSeconds(time);
+    callback();
+}
 
+(...)
+
+// Call the 1 second wait
+Wait(1, () => {
+              ShowQuestion();
+          });
 ```
+
 Note that in Unity3D you have to use coroutines in order to get time delays, since normal function execution is locked to frames (e.g. calling from void Update(){...}).
 
 This fix didn't work.  After analyzing the issue closer, I still couldn't find the root cause.  In order to not waste more time on the issue, I figured I would create a guard statement to check the time between answers - if the time was shorter than *n* secs since last answer, then the following answer would be ignored.  This worked great, the code was slick aswell, and had us moving forward in no time:
-```
 
+```
+// Guard statement to omit issue with question jumping
+if (Time.time - timeElapsedQuestion < 2.0f)
+    return;
+timeElapsedQuestion = Time.time;
 ```
 
 ### The animator components and Unity3D Animation stack
@@ -65,9 +86,47 @@ This fix didn't work.  After analyzing the issue closer, I still couldn't find t
 To get animations working and to be able to alter them through the scripting system, unity provides the animator controller which is very slick for handling animations. Even though code is itself very powerful for many things, sometimes using node editors can make the system much easier to represent and self document. Since animation is indeed a very visual thing, node editors are often very useful for handling them - for example one of the most popular add-ons for blender is the node editor for animation handling.
 
 Basically the requirement was to activate the animations of animated objects after a short delay after the player looked at them.  So I did the following:
-```
 
 ```
+bool ObjectIsVisible(Vector3 targetPoint) {
+        Camera MainCam = gameObject.GetComponent<CameraSwitcher>().MainCamera;
+        Vector3 screenPoint = MainCam.WorldToViewportPoint(targetPoint);
+
+        if (screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1)
+            return true;
+        else
+            return false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        for (int i = 0; i < AnimObjects.Length; i++) // Loop through the objects
+        {
+            /* Get the data on the object */
+            _animObject = AnimObjects[i];
+            _animController = _animObject.GetComponent<Animator>();
+            _curr_animAmount = _animController.GetFloat("AnimParam");
+
+            if (ObjectIsVisible(_animObject.transform.GetChild(0).position))
+            { // If object is visible
+                _animController.SetFloat("AnimParam",
+                    ( _curr_animAmount < 5 ? _curr_animAmount + animationIncrementer : _curr_animAmount ) // Then increment animation
+                  );
+            } else { // Object invisible
+                _animController.SetFloat("AnimParam",
+                    ( _curr_animAmount > 0 ? _curr_animAmount - animationIncrementer : _curr_animAmount ) // Then decrement animation
+                  );
+            }
+        }
+    }
+```
+
+So in short this code will
+1. Iterate through all objects which we will be animating (we get the objects by using a tag like so: `GameObject.FindGameObjectWithTag("AnimObject");`)
+2. Check if the object is visible
+3. Increment the animation amount float up to 5 every frame the player is looking at object
+4. If player is not looking at object, we will decrement the animation amount
 
 ### Unity3D Manager pattern
 
@@ -78,5 +137,23 @@ There is a recurring pattern in Unity to have manager scripts to handle manageme
 For the project, part of the requirements was also to give the player the ability to "teleport" or switch between scenes.  This requirement was solved using this code in a manager called CameraSwitcher:
 
 ```
+/*
+cameras is an array of Camera objects.  We can get all cameras in the scene at start
+by calling the following code:
 
+cameras = Camera.allCameras;
+
+Next we can use the SetCameraActive function with an index to enable a given camera
+*/
+public void SetCameraActive(int _cameraIndex) {
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            cameras[i].gameObject.GetComponent<AudioListener>().enabled = false;
+            cameras[i].enabled = false;
+        }
+        cameras[_cameraIndex].gameObject.GetComponent<AudioListener>().enabled = false;
+        cameras[_cameraIndex].enabled = true;
+        MainCamera = cameras[_cameraIndex];
+        Debug.Log("Main camera is now" + MainCamera);
+    }
 ```
