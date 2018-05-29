@@ -142,7 +142,7 @@ kbd,
 samp {
   font-family: monospace, monospace;
   /* 1 */
-  font-size: 1em;
+  font-size: .8em;
   /* 2 */
 }
 
@@ -436,11 +436,15 @@ template {
   display: none;
 }
 
+
+
 .highlight {
+
   background-color: #faf9f9;
   -webkit-border-radius: 3px;
           border-radius: 3px;
   margin: 0;
+  overflow-x: auto;
 }
 
 .highlighter-rouge {
@@ -808,6 +812,7 @@ pre code {
   border: 0;
   padding-right: 0;
   padding-left: 0;
+  overflow: scroll;
 }
 
 table {
@@ -1445,4 +1450,10 @@ a.newer-posts:hover {
   .post .post-content .post-title a {
     font-size: 21px;
   }
+  /* .highlight {
+    max-width: 90vw;
+  } */
 }
+
+@media only screen and (max-width: 768px) { .highlight { max-width: 90vw; }}
+@media only screen and (min-width: 768px) { .highlight { max-width: 60vw; }}
