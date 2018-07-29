@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Stuck at terminal island"
+title: "Stuck at Terminal Island"
 subtitle: "Saving lost penguins"
 description: "Saving lost penguins"
 date: 2018-07-29
