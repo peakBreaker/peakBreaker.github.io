@@ -44,7 +44,7 @@ GEM
       rb-inotify (>= 0.9)
     mercenary (0.3.6)
     minitest (5.9.0)
-    nokogiri (1.6.8.1)
+    nokogiri (1.8.2)
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
     public_suffix (2.0.5)
