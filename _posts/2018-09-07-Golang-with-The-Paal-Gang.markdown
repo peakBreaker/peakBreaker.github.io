@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Golang with the Pålgang"
-date: 2018-09-07
+date: 2018-09-20
 author: Anders
 category: Golang
 tags: go software web
@@ -37,6 +37,7 @@ mastery of Golang.
 So join us in discovering this great programming language!
 
 ## Main characteristics of Golang
+
 - General purpose programming language
 - Compiled languate w/ great compile time and performance
 - Static types
@@ -72,8 +73,14 @@ A few of my main takeaways/heads up from the basics of golang syntax
 - When returning multiple values, either give all returns a declaration in function prototype, or none (just datatypes types).  Declaring return variables in function prototype will return them implicitly.
 
 ```
-
+func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
 ```
+
+The above function will return x and y implicitly because they are declared as returns in the function prototype. Sweet!
 
 - go fmt is the standard for golang formatting/convention: `$ go fmt myfile.go`
 - Golang scope rules are very simple, everything between {} is a scope
@@ -81,14 +88,46 @@ A few of my main takeaways/heads up from the basics of golang syntax
 - In switch case statements, break is implicit/default and to ignore a break one writes the `fallthrough` keyword
 
 ```
-
+v := 42
+switch v {
+case 100:
+	fmt.Println(100)
+	fallthrough
+case 42:
+	fmt.Println(42)
+	fallthrough
+case 1:
+	fmt.Println(1)
+	fallthrough
+default:
+	fmt.Println("default")
+}
+// Output:
+// 42
+// 1
+// default
 ```
+
+*In C, for example, this is switched. By default the switch statement in C will
+fallthrough, and one writes `break` to break the switch statement.  In Golang,
+the break is implicit. Since one most often want to break the switch statment,
+the golang syntax is pretty great!*
 
 - Exported variables, constants and functions from packages must start with a capital letter
 
 ```
+import (
+	"fmt"
+	"math"
+)
 
+func main() {
+	fmt.Println(math.pi) // doesn't work
+	fmt.Println(math.Pi) // works
+}
 ```
+
+A great tut on this in [A Tour of Go](https://tour.golang.org/basics/3)
 
 ## Golang datatypes
 
@@ -204,4 +243,6 @@ building stuff concurrently, namely Goroutines and channels
 - `encoding` and `json` for serializing structured data
 - Reader/Writer interfaces which are quite common
 
+## Thanks for reading
 
+This is all for now, later I may dive deeper into some of the parts of Golang!
