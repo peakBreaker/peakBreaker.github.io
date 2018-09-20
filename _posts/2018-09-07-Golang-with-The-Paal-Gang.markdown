@@ -43,7 +43,7 @@ So join us in discovering this great programming language!
 - Static types
 - Strings, chars, pointers, mutant for loops
 - Implicit interfaces, structs, maps, slices and arrays
-- Made with concurrency in mind
+- Made with concurrency in mind; Goroutines and channels
 - Nice utilities: Defer, multiple returns
 
 ## Whats in $GOPATH?
@@ -64,7 +64,8 @@ This creates a $GOPATH workflow:
 * Normal structure is this:
 `$GOPATH/src/myProj/vendor/package`
 * protip: Use godep instead of `$ go get` to maintain better structure.  I wont get to much into the use of this in this post
-* Note: Go 1.11 introduces experimental support for projects outside $GOPATH
+* Note: Go 1.11 introduces experimental support for projects outside $GOPATH.
+  Havent looked too closely on this yet, but theres a [wiki entry](https://github.com/golang/go/wiki/Modules)
 
 ## Golang Syntax
 
@@ -140,24 +141,72 @@ A great tut on this in [A Tour of Go](https://tour.golang.org/basics/3)
   * char: called rune, utf-8 => int32 under the hood
 
 ### Arrays
-1. Arrays are lists of values
-2. var myArray [<optional len>]<datatype>{<optional initializer>}
-    * myArray :=  [<optional len>]<datatype>{<optional initializer>}
-3. Array utils: 
-    * len(myArray) => int length
-    * for idx, val := range myArray {} // foreach with enumerate
+* Arrays are lists of values
+
+```
+// var myArray [<optional len>]<datatype>{<optional initializer>}
+// myArray :=  [<optional len>]<datatype>{<optional initializer>}
+myArray := [2]string{'hello', 'world'}
+```
+
+* Array utils: 
+
+```
+// Getting length in int
+len(myArray)
+// Looping over array
+for idx, val := range myArray {...} 
+```
 
 ### Slices
-1. Slices are parts of an array
-2. array := [<len>]<datatype>{<optional initializer>}
-    * slice := array[<begin>:<end>]
-    * slices point to the underlying array
-3. Slice utils:
-  * len(slice)  // length of slice
-  * cap(slice) // capacity of slice
-  * append(<slice>, <value>[, <more values>]) // This returns a new instance
-    * When using append, it is adviced to return to the same slice as appended to
-slice = append(slice, value)
+- Slices are parts of an underlying array
+
+```
+// array := [<len>]<datatype>{<optional initializer>}
+// slice := array[<begin>:<end>]
+```
+
+And theyre very nice to work with.  Here are some slice utils:
+
+```
+len(slice)  // length of slice
+cap(slice) // capacity of slice
+append(<slice>, <value>[, <more values>]) // returns a new slice
+```
+
+Note on appending to slices: The new slice may point to the underlying array
+only if appending to the slice didnt overflow the array.  Pål made a nice demo
+on this:
+
+```
+s := make([]string, 1, 2)  // Length 1. Cap 2
+s[0] = "start"             // Base slice
+s1 := append(s, "slice 1") // Shared undelying array
+s2 := append(s, "slice 2") // Shared undelying array
+s3 := append(s, "slice 3",
+    "needs more space!") // Exceedes cap. Allocates a new array
+
+fmt.Printf("Before mutating:\ns:\t%v\ns1:\t%v\ns2:\t%v\ns3:\t%v\n", s, s1, s2, s3)
+s[0] = "mutated"
+fmt.Printf("After mutating:\ns:\t%v\ns1:\t%v\ns2:\t%v\ns3:\t%v\n", s, s1, s2, s3)
+```
+
+Outputs:
+
+```
+Before mutating:
+s:	[start]
+s1:	[start slice 2]
+s2:	[start slice 2]
+s3:	[start slice 3 needs more space!]
+After mutating:
+s:	[mutated]
+s1:	[mutated slice 2]
+s2:	[mutated slice 2]
+s3:	[start slice 3 needs more space!]
+```
+
+hyyyyyiiiiiinteresting
 
 ### Maps
 * Maps are like python dictionaries, but they are type sensitive
@@ -233,19 +282,29 @@ func (v Vertex) Abs() float64 {...}
 
 ### Interfaces
 
-  * The interface type is a set of method signatures
-  * Interfaces are implemented implicitly, if a datatype has the methods to satisfy the interface, it automatically implements the interface
-  * Syntax for declaring interface: 
+* The interface type is a set of method signatures
+* Interfaces are implemented implicitly, if a datatype has the methods to satisfy the interface, it automatically implements the interface
+* Syntax for declaring interface: 
 
 `type <MyInterface> interface {/*methods*/}`
 
-  * Describing interfaces:
+* Describing interfaces:
 
 ```
 fmt.Printf("(%v, %T)\n", i, i) // i is an interface
 ```
 
-  * a variable declared as an interface may be initialized with all types with the corresponding methods
+This will show us that the interface is just a tuple of a value and datatype.
+This is well illustrated in the [Tour of Go](https://tour.golang.org/methods/14) example.
+
+```
+Some interfaces:
+(<nil>, <nil>)
+(42, int)
+(hello, string)
+```
+
+* a variable declared as an interface may be initialized with all types with the corresponding methods
 
 ## Golang concurrency
 
@@ -253,9 +312,10 @@ Golang is built with concurrency in mind, and thus has some cool features for
 building stuff concurrently, namely Goroutines and channels
 
 - Goroutines
-  * Basically a concurrent function
-  * Syntax: go <funcion>()
-  * Goroutines must be void
+  * A syntax for starting [goroutines](https://golang.org/ref/spec#Go_statements)
+  * Syntax: go <expression>
+  * Goroutines cant catch/handle returns, but can interact with channels (see
+    below)
 - Channels
   * Allows us to do IPC
   * Syntax:
