@@ -13,6 +13,29 @@ img: covers/paalsgo.png
 
 # This is Pål
 
+![paal]({{site.baseurl}}/assets/img/blog/paalsgo/paal.jpg)
+
+*(He is the normal looking one by the window)*
+
+Pål is the superhero developer keeping the Sensario backend operational.
+
+I have worked Pål on his right hand side since late 2017 and have enjoyed every
+second of it.  We have been getting coffee together nearly every day, spoken
+and learned about software engineering together and discovered the magic of Vim
+and Chad memes together.
+
+![chad linux]({{site.baseurl}}/assets/img/blog/paalsgo/chad_linux.png)
+
+*From alg0001 on [reddit](https://www.reddit.com/r/virginvschad/comments/7rkm5n/the_virgin_windows_peasant_vs_the_chad_gnulinux/)*
+
+Pål joined the Sensario company late 2017 with the goal of building the backend of
+the company so it could handle and process the incoming traffic from both our
+IoT sensor nodes with LTE (which I am programming), users and he has provided
+development services for the the engineering team. To do this, he has shown great 
+mastery of Golang.
+
+So join us in discovering this great programming language!
+
 ## Main characteristics of Golang
 - General purpose programming language
 - Compiled languate w/ great compile time and performance
@@ -39,7 +62,8 @@ This creates a $GOPATH workflow:
      * With golang we import from $GOPATH/src/...
      * Normal structure is this:
           -> $GOPATH/src/myProject/vendor/3rdpartypackage
-          -> protip: Use glide instead of `$ go get` to maintain better structure.  I wont get to much into the use of this in this post
+          -> protip: Use godep instead of `$ go get` to maintain better structure.  I wont get to much into the use of this in this post
+     * Note: Go 1.11 introduces experimental support for projects outside $GOPATH
 
 ## Golang Syntax
 
@@ -170,8 +194,8 @@ building stuff concurrently, namely Goroutines and channels
     * Allows us to do IPC
     * Syntax:
           -> Making channel: channel := make(chan <type>)
-          -> Reading from channel: <-channel
-          -> Writing to channel: channel <- <value>
+          -> Reading from channel: `<-chan`
+          -> Writing to channel: `chan<- <value>`
 
 ## Utilies worth mentioning
 
