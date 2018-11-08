@@ -80,21 +80,60 @@ generating docs from docstrings.
 
 #### Modular Documentation
 
-Okay so lets extend the index.rst file with another file
+Okay so lets extend the index.rst file with another file. Lets say we have the
+following folder structure
 
 ```
 docs/
  | -- index.rst
- | -- extend.rst
+ | -- api.rst
 ```
 
-#### Documenting code with autodocs
+To include the extended documentation, we write the following in `index.rst`:
+
+```
+Documentation is Awesome!
+=========================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Table of Contents:
+
+   api
+```
+
+This should include the extend.rst file
+
+#### Generating documentation from docstrings
+
+First we make sure we can include our python code by adding the following in
+our conf.py (fill out the path to the code):
+```
+sys.path.insert(0, os.path.abspath('<path to code>'))
+```
+and make sure the `'sphinx.ext.autodoc'` extention is added to extentions in
+conf.py. To write docstrings in a different format than traditional
+reStructuredText (such as numpy below), include the `'sphinx.ext.napoleon'` extention aswell.
+
+Write docstrings in the code with, for example, the [NumPy](http://www.sphinx-doc.org/en/1.5/ext/example_numpy.html#example-numpy)
+style docstrings, and finally compile the documentation.
+
+`$ make html`
+
+Now check out the docs, and you should see the docstrings in the documentation!
 
 #### ReadTheDocs
 
+Deploying on [ReadTheDocs](https://readthedocs.org) is quite straight forward.
+Just set up a new account (with github), go to [Dashboard](https://readthedocs.org/dashboard/)
+and press "Import a Project".  Then select the repository with the sphinx
+documentation and you should be flying
+
+If youve come this far, you can look at my test deployment [here](https://docme.readthedocs.io)
+
 ### Round 2: Sphinx with gh-pages
 Since we ultimately want the documentation on gh-pages, This next point will
-take on the 
+take on how we do that.
 
 ### Round 3: Sphinx with submodules
 ### Round 4: Authentication with Jekyll auth and Heroku Dyno
