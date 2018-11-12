@@ -11,10 +11,73 @@ img: covers/
 
 # Documentation
 
-Documentation is one of those funny things for developer or engineers. It is
-one of the most social things that these creatures do 
+In this entry, I am happy to be writing about something I have strong feelings
+for and about.  Documentation is one of those core needs in the maslow pyramid
+of technology, yet far too often overlooked.
+
+It sounds easy, right? Just write some documents on what youre doing. Wrong, 
+that attitude does not scale. Unmaintained documentation is worse than no
+documentation, and documentation accumulates the same technical dept as code,
+thus it should be treated with atleast as much love.
+
+In addition documentation means so many different things, so in order to have
+any communication on this subject, we need to specify what documentation even
+means.
+
+## What is documentation
+
+Documentation comes from the english word "Document" which means
+a "representation of thought". Man, thats deep.
+
+When you write, you write to different audiences. In my case here, Im writing to
+someone called "no one" *(cry)*. You are also writing for different purposes,
+In my case here, Im writing because I have a strange affiliation with
+documentation.
+
+**TL;DR on this chapter:** Documentation can roughly be divided in two, *Process
+documentation* for the devs, engineers and whatnot which needs some level of
+technical competence, and *User documentation* which is for those pesky users
+who doestn necessarily have years of experience with the technology you spend
+your life building.
+
+Lets go through some different types of docuementation for some examples:
+
+**Code as Documentation:** When you craft code, your code should be clear enough 
+to self document *what* it is doing. Comments in code should tell you *Why* the
+code is doing whatever it is doing. Docstrings, those comments at the top of
+files, classes, functions and whatever else, provide an idea of *usage*. We'll
+get back to docstrings.
+
+**README:** Provides instructions on running your project and setting up
+a devenv. Essential to every project you wish to share.
+
+**API Docs:** Guide and reference for how to use your API. Should absolutely be
+provided if you want people to use your technology.
+
+**Style guides:** Document which detemines the style guide and conventions for
+whatever. For example, should variable names follow PascalCase, camelCase or
+under_scores? Well theres a lot more to this, but it sets the conventions for
+the technology development, so we can all follow the same standards, which is
+very nice.
+
+**Requirements & design documents:** Bridge between devs and stakeholders.
+
+**Wiki/Guides:** Explains concepts for the technology. For example, I used
+a ringbuffer like datastructure once and created a wiki entry to explain the
+conceptual level of how it works. May also provide mathematics on how something
+works, which is great as its a very efficient way of expressing concepts.
+
+**User manuals:** How a user should use your product, but often also loved by
+the SysAdmin.
+
+So documenation come in very many flavors, and have many different use-cases.
+There are some additional ones, such as QA documents, but those should almost
+have a own blogpost for themselves.
 
 ## Challanges with documentation
+
+With such complexity and so many different forms of documentation, there are
+plenty of challenges with writing documentation:
 
 - It is time consuming
 - It can be(come) misleading
@@ -22,11 +85,33 @@ one of the most social things that these creatures do
   but not the documentation)
 - It becomes an ad-hoc operation
 
+So many engineers and developers hate it, or dont do it all. It is often joked
+that omitting documentation gives work security, because when youre the only
+one who knows the technology, then you cant be fired.  hehe.
+
+*HEHEHEHE.*
+
+You evil sob
+
 ## Why document
 
 So with all these challenges, why bother spending time and resources to write
-good documentation? Why even write documentation? Plenty of people go through
-life without writing good documenation, and plenty of technology just lies in
+good documentation? Why even write documentation at all? Well:
+
+- 6 months from now, you're gonna thanks yourself because you dont remember the
+  details of the technology you made
+- You want to create value (thats why youre working with tech, right?) and be
+  useful for the people around you
+- You want people to use your technology (it makes your technology more
+  valuable, which is good for you)
+- It structures your thoughts and improved your technology
+- You cant scale without Software Engineering and documentation is a part of SE
+
+Okay great, but again writing bad and misleading documenation is worse than no
+documentation. So we must apply systems and tools to automate and scale the way
+we do documentation, so that we can be more efficient and effective at our
+technical writing skills. Thus Im going to introduce a toolchain for docs
+below, and we'll get started with some proper docs. Sound good? Great!
 
 ## Introduction to sphinx
 
@@ -135,6 +220,125 @@ If youve come this far, you can look at my test deployment [here](https://docme.
 Since we ultimately want the documentation on gh-pages, This next point will
 take on how we do that.
 
-### Round 3: Sphinx with submodules
-### Round 4: Authentication with Jekyll auth and Heroku Dyno
-### Round 5: Bringing it all together
+1. Create a repository on github (which will be the gh-pages docs repo)
+2. Clone the repo as html: `$ git clone git@github.com/<username>/<repo>.git html`
+3. `cd` into the repo and follow the instructions above to run
+`$ sphinx-quickstart`. Make sure you select `y` youre being prompted about githubpages
+```
+> githubpages: create .nojekyll file to publish the document on GitHub pages (y/n) [n]: 
+```
+4. Now edit and build the docs `$ make html`
+To run make clean (on html only), and add the following to the makefile:
+```
+clean:
+    @rm -rf $(BUILDDIR)/html/*.{html,js} $(BUILDDIR)/html/{objects.inv,_static,_sources,.buildinfo}
+```
+Add a few extra items to the .gitignore:
+```
+# User ignores
+objects.inv
+.buildinfo
+_sources
+```
+5. Commit and push the project with all the html compiled: `$ git commit -m "Added documentation as html for gh-pages" && git push -u <repo>`
+6. Enable gh-pages on github for the repo [github pages]()
+
+Finally you should have it deployed on gh-pages like [this](https://peakbreaker.com/docme_pages), with [this repo](https://github.com/peakBreaker/docme_pages)
+
+### Round 3: Sphinx with git submodule
+
+Adding submodules is pretty straight forward
+1. `$ git submodule add <submodule>`
+2. Add the docs in the submodule to the rst files
+3. Build and push the new documentation
+
+### Round 4: Deploying docs with OAuth on Heroku
+
+This blogpost originally came from the desire to update and
+improve the way my company does documentation. Understandably, they and many
+others do not want all their trade secrets and proprietary technology openly
+exposed on the web, so I wanted to add a layer of protection on the
+documentation. Say hello to OAuth.
+
+Now Im not going to go into the depths of how OAuth works, as there are many
+guides already on that subject, and it can become a blogpost of its own.
+I want to just set up and deploy a layer of OAuth protection on the
+documentation. So for this I will planned the following:
+
+- Use the [Flask-Dance](https://github.com/singingwolfboy/flask-dance) library
+  to get OAuth capabilities
+- Use GitHub OAuth
+- Deploy on Heroku
+- Check user organizations using OAuth and check if they are part of whatever
+  org to authenticate
+
+**Cool, Lets get started!**
+
+The author of the Flask Dance library had written an [example implementation](https://github.com/singingwolfboy/flask-dance-github)
+ of Github OAuth, so I used it to get started. He also provided a very good
+readme which I followed.
+
+To check the organizations, I found an useful [issue](https://github.com/singingwolfboy/flask-dance/issues/131),
+and github [api docs](https://developer.github.com/v3/orgs/) so I deployed the app with the following code:
+
+```
+import os
+import json
+
+from werkzeug.contrib.fixers import ProxyFix
+from flask import Flask, redirect, url_for
+from flask_dance.contrib.github import make_github_blueprint, github
+
+app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "supersekrit")
+app.config["GITHUB_OAUTH_CLIENT_ID"] = os.environ.get("GITHUB_OAUTH_CLIENT_ID")
+app.config["GITHUB_OAUTH_CLIENT_SECRET"] = os.environ.get("GITHUB_OAUTH_CLIENT_SECRET")
+github_bp = make_github_blueprint(scope='read:org')
+app.register_blueprint(github_bp, url_prefix="/login")
+
+AMEDIA_ORG_ID = 582844
+
+
+@app.route("/")
+def index():
+    if not github.authorized:
+        return redirect(url_for("github.login"))
+
+    # Get user details
+    resp = github.get("/user")
+    ret = '<h2>USER DETAILS:</h2><br>'
+    if resp.ok:
+        ret += "You are %s on GitHub<br>" % resp.json()["login"]
+    else:
+        ret += 'FAILED AT GETTING USER DATA<br>'
+
+    # Get user organizations
+    ret += '<h2>ORGANIZATIONS:</h2><br>'
+    resp = github.get("/user/orgs")
+    if not resp.ok:
+        ret += 'FAILED AT GETTING USERORG DATA<br>'
+    else:
+        u_orgs = resp.json()
+        ret += "<pre>%s</pre><br>" % json.dumps(u_orgs, indent=4)
+
+        # Check if user is part of Amedia
+        for org in u_orgs:
+            if org.get('id', None) == AMEDIA_ORG_ID:
+                ret += '<h3>--- YOU ARE PART OF AMEDIA ORGANIZATION --- </h3>'
+                break
+        else:
+            ret += '<h3>--- YOU ARE NOT MEMBER OF AMEDIA --- </h3>'
+
+    # Finally return the retval
+    return ret
+
+
+if __name__ == "__main__":
+    app.run()
+```
+
+**What I leared from this:**
+1. Make sure the OAuth scope is correct too see user orgs (notice the line `github_bp = make_github_blueprint(scope='read:org')`)
+2. Use env vars for the client_id and client_secret
+3. Heroku is quite nice for quick app deployments
