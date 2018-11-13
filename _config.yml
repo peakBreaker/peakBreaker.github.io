@@ -13,12 +13,12 @@ social-twitter: peakbreaker # add your Twitter handle
 social-facebook: # add your Facebook handle
 social-linkedin: anders-l-hurum # add your Linkedin handle
 social-github: peakbreaker # your Github username
-social-email: peakbreaker.io@gmail.com # add your Email address
+social-email: andershurum@gmail.com # add your Email address
 
 # Author Settings
 author: Anders L. Hurum # add your name
 author-img: anders_profile.jpg # add your photo
-about-author:  Engineer hoping to impress girls with big beautiful blocks of code # add description
+about-author:  Hoping to write code as beautiful as my girlfriend | Data Engineer for [Amedia](http://www.amedia.no/)
 
 discus-identifier: peakbreaker-blog # your disqus username
 analytics: UA-117207692-1 # Google Analytics

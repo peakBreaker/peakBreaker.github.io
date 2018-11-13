@@ -6,7 +6,7 @@ description: > # this means to ignore newlines until "baseurl:"
     This is where I write my daily technology insights - Here you'll find tech,
     tuts and talk from my life as an engineer.
 
-baseurl: "/blog/"  # the subpath of your site, e.g. /blog
+baseurl: "/blog"  # the subpath of your site, e.g. /blog
 url: "https://peakbreaker.com" # the base hostname & protocol for your site
 site-twitter: peakbreaker # your Twitter username
 social-twitter: peakbreaker # add your Twitter handle
@@ -18,7 +18,7 @@ social-email: peakbreaker.io@gmail.com # add your Email address
 # Author Settings
 author: Anders L. Hurum # add your name
 author-img: anders_profile.jpg # add your photo
-about-author: Engineer hoping to impress girls with big beautiful blocks of code # add description
+about-author:  Hoping to write code as beautiful as my girlfriend | Data Engineer at <a href="http://www.amedia.no/">Amedia</a>
 
 discus-identifier: peakbreaker-blog # your disqus username
 analytics: UA-117207692-1 # Google Analytics
