@@ -18,7 +18,7 @@ social-email: andershurum@gmail.com # add your Email address
 # Author Settings
 author: Anders L. Hurum # add your name
 author-img: anders_profile.jpg # add your photo
-about-author:  Hoping to write code as beautiful as my girlfriend | Data Engineer for [Amedia](http://www.amedia.no/)
+about-author:  Hoping to write code as beautiful as my girlfriend | Data Engineer at <a href="http://www.amedia.no/">Amedia</a>
 
 discus-identifier: peakbreaker-blog # your disqus username
 analytics: UA-117207692-1 # Google Analytics
