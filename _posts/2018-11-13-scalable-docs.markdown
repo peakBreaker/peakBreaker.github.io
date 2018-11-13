@@ -199,7 +199,7 @@ This should include the api.rst file
 First we make sure we can include our python code by adding the following in
 our conf.py (fill out the path to the code):
 
-```
+```python
 sys.path.insert(0, os.path.abspath('<path to code>'))
 ```
 
@@ -280,7 +280,7 @@ $ git commit -m "Added documentation as html for gh-pages" && git push -u <repo>
 
 - Enable gh-pages on github for the repo by going to repository settings
 
-![github pages setting]({{site.baseurl}}/assets/img/blog/gh-pages-docs.png)
+![github pages setting]({{site.baseurl}}/assets/img/blog/gh-pages-docme.png)
 
 Finally you should have it deployed on gh-pages like [this](https://peakbreaker.com/docme_pages), 
 with [this repo](https://github.com/peakBreaker/docme_pages)
@@ -330,7 +330,7 @@ readme which I followed.
 To check the organizations, I found an useful [issue](https://github.com/singingwolfboy/flask-dance/issues/131),
 and github [api docs](https://developer.github.com/v3/orgs/) so I deployed the app with the following code:
 
-```
+```python
 import os
 import json
 
@@ -390,13 +390,13 @@ if __name__ == "__main__":
 Some comments on the code above:
 - Make sure the OAuth scope is correct too see user orgs. Notice the line 
 
-```
+```python
 github_bp = make_github_blueprint(scope='read:org')
 ```
 
 - Use env vars for the client_id and client_secret 
 
-```
+```python
 os.environ.get('<env var>')
 ```
 
