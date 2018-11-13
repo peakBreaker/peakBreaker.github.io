@@ -1,19 +1,21 @@
 ---
 layout: post
-title: "Scalable Microservice Documentation"
-date: 2018-11-06
+title: "Scalable Documentation"
+date: 2018-11-13
 author: Anders
 category: Docs
-tags: Sphinx Python Documentation
-finished: false
-img: covers/
+tags: Sphinx Python Documentation gh-pages oauth readthedocs rtfd heroku cloud
+finished: true
+img: covers/docs.png
 ---
 
 # Documentation
 
-In this entry, I am happy to be writing about something I have strong feelings
+In this entry, I am happy to be writing about something I have feelings
 for and about.  Documentation is one of those core needs in the maslow pyramid
 of technology, yet far too often overlooked.
+
+![yo dawd documentation](http://www.quickmeme.com/img/fc/fc987e2549a985112129f76108984dcaa0b73bd240c0b6e15b12e53ac19e4991.jpg)
 
 It sounds easy, right? Just write some documents on what youre doing. Wrong, 
 that attitude does not scale. Unmaintained documentation is worse than no
@@ -36,8 +38,8 @@ documentation.
 
 **TL;DR on this chapter:** Documentation can roughly be divided in two, *Process
 documentation* for the devs, engineers and whatnot which needs some level of
-technical competence, and *User documentation* which is for those pesky users
-who doestn necessarily have years of experience with the technology you spend
+technical competence to read, and *User documentation* which is for those pesky users
+who doesnt necessarily have years of experience with the technology you spend
 your life building.
 
 Lets go through some different types of docuementation for some examples:
@@ -49,7 +51,7 @@ files, classes, functions and whatever else, provide an idea of *usage*. We'll
 get back to docstrings.
 
 **README:** Provides instructions on running your project and setting up
-a devenv. Essential to every project you wish to share.
+a devenv. Pretty essential to any project.
 
 **API Docs:** Guide and reference for how to use your API. Should absolutely be
 provided if you want people to use your technology.
@@ -60,7 +62,8 @@ under_scores? Well theres a lot more to this, but it sets the conventions for
 the technology development, so we can all follow the same standards, which is
 very nice.
 
-**Requirements & design documents:** Bridge between devs and stakeholders.
+**Requirements & design documents:** Bridge between devs and stakeholders,
+outlines the architecture and overviews the software.
 
 **Wiki/Guides:** Explains concepts for the technology. For example, I used
 a ringbuffer like datastructure once and created a wiki entry to explain the
@@ -69,6 +72,8 @@ works, which is great as its a very efficient way of expressing concepts.
 
 **User manuals:** How a user should use your product, but often also loved by
 the SysAdmin.
+
+![Manuals xkcd](https://imgs.xkcd.com/comics/manuals.png)
 
 So documenation come in very many flavors, and have many different use-cases.
 There are some additional ones, such as QA documents, but those should almost
@@ -79,7 +84,7 @@ have a own blogpost for themselves.
 With such complexity and so many different forms of documentation, there are
 plenty of challenges with writing documentation:
 
-- It is time consuming
+- It is timeconsuming
 - It can be(come) misleading
 - It can become unsynced with the source (if you change the code it documents,
   but not the documentation)
@@ -90,8 +95,6 @@ that omitting documentation gives work security, because when youre the only
 one who knows the technology, then you cant be fired.  hehe.
 
 *HEHEHEHE.*
-
-You evil sob
 
 ## Why document
 
@@ -107,36 +110,38 @@ good documentation? Why even write documentation at all? Well:
 - It structures your thoughts and improved your technology
 - You cant scale without Software Engineering and documentation is a part of SE
 
+![if you could just document](https://media.makeameme.org/created/yeah-if-you-4xnjle.jpg)
+
 Okay great, but again writing bad and misleading documenation is worse than no
 documentation. So we must apply systems and tools to automate and scale the way
 we do documentation, so that we can be more efficient and effective at our
 technical writing skills. Thus Im going to introduce a toolchain for docs
 below, and we'll get started with some proper docs. Sound good? Great!
 
-## Introduction to sphinx
-
-Sphinx is a rather mature documentation tool, being heavily used in the python
-community, and written almost entirely in python. It is the tool used for
-documenting a large number of open source projects, for example the 
-[Linux Kernel](https://www.kernel.org/doc/html/latest/index.html),
-[Python itself](https://docs.python.org/3/),
-[Blender](https://docs.blender.org/manual/en/latest/) and many more
-
-## Lets get started
+## Scalable documentation toolchain
 
 Lets implement a documentation stack for automating our documentation workflow!
 
-### Prereq
-- python with virtualenv and pip
-- git
-- `virtualenv venv && source venv/bin/activate`
-- `pip install sphinx`
-
 ### Round 1: Sphinx with Readthedocs
+
+Sphinx is a rather mature documentation tool, being heavily used in the python
+community, and written almost entirely in python. It is the tool used for
+documenting a large number of open source projects, for example the:
+
+- [Linux Kernel](https://www.kernel.org/doc/html/latest/index.html),
+- [Python itself](https://docs.python.org/3/),
+- [Blender](https://docs.blender.org/manual/en/latest/)
+- And many more
 
 First off on creating a scalable documentation stack with sphinx is to get
 sphinx up and running. In addition I will host the test project on readthedocs,
-for demo purposes and because its very easy.
+for demo purposes and because its very quick and easy.
+
+#### Prereq
+- python with virtualenv and pip
+- git
+- virtualenv venv && source venv/bin/activate
+- `pip install sphinx`
 
 #### Setting up sphinx
 
@@ -187,21 +192,34 @@ Documentation is Awesome!
    api
 ```
 
-This should include the extend.rst file
+This should include the api.rst file
 
 #### Generating documentation from docstrings
 
 First we make sure we can include our python code by adding the following in
 our conf.py (fill out the path to the code):
+
 ```
 sys.path.insert(0, os.path.abspath('<path to code>'))
 ```
-and make sure the `'sphinx.ext.autodoc'` extention is added to extentions in
+
+and make sure the *'sphinx.ext.autodoc'* extention is added to extentions in
 conf.py. To write docstrings in a different format than traditional
-reStructuredText (such as numpy below), include the `'sphinx.ext.napoleon'` extention aswell.
+reStructuredText (such as numpy below), include the *'sphinx.ext.napoleon'* extention aswell.
+You want to include your python module in your api.rst file, such as this:
+
+```
+API documentaiton
+=================
+
+.. automodule:: <my python module with docstrings>
+   :members:
+```
+
+Remember that it is included from the path set above.
 
 Write docstrings in the code with, for example, the [NumPy](http://www.sphinx-doc.org/en/1.5/ext/example_numpy.html#example-numpy)
-style docstrings, and finally compile the documentation.
+style docstrings, and finally compile the documentation with make.
 
 `$ make html`
 
@@ -217,42 +235,71 @@ documentation and you should be flying
 If youve come this far, you can look at my test deployment [here](https://docme.readthedocs.io)
 
 ### Round 2: Sphinx with gh-pages
-Since we ultimately want the documentation on gh-pages, This next point will
-take on how we do that.
+Since can be useful to deploy on gh-pages (such as in round 3), this next point will take on how we do that.
 
-1. Create a repository on github (which will be the gh-pages docs repo)
-2. Clone the repo as html: `$ git clone git@github.com/<username>/<repo>.git html`
-3. `cd` into the repo and follow the instructions above to run
-`$ sphinx-quickstart`. Make sure you select `y` youre being prompted about githubpages
+- Create a repository on github (which will be the gh-pages docs repo)
+- Clone the repo as html:
+
+```
+$ git clone git@github.com/<username>/<repo>.git html
+```
+
+- cd into the repo and run quickstart:
+
+```
+$ cd html && sphinx-quickstart
+```
+
+Make sure you select `y` youre being prompted about githubpages
+
 ```
 > githubpages: create .nojekyll file to publish the document on GitHub pages (y/n) [n]: 
 ```
-4. Now edit and build the docs `$ make html`
-To run make clean (on html only), and add the following to the makefile:
+
+- Now edit and build the docs. To run make clean (on html only), add the following to the makefile:
+
 ```
 clean:
     @rm -rf $(BUILDDIR)/html/*.{html,js} $(BUILDDIR)/html/{objects.inv,_static,_sources,.buildinfo}
 ```
-Add a few extra items to the .gitignore:
+
+- Add a few extra items to the .gitignore:
+
 ```
 # User ignores
 objects.inv
 .buildinfo
 _sources
 ```
-5. Commit and push the project with all the html compiled: `$ git commit -m "Added documentation as html for gh-pages" && git push -u <repo>`
-6. Enable gh-pages on github for the repo [github pages]()
 
-Finally you should have it deployed on gh-pages like [this](https://peakbreaker.com/docme_pages), with [this repo](https://github.com/peakBreaker/docme_pages)
+- Commit and push the project with all the html compiled: 
 
-### Round 3: Sphinx with git submodule
+```
+$ git commit -m "Added documentation as html for gh-pages" && git push -u <repo>
+```
+
+- Enable gh-pages on github for the repo by going to repository settings
+
+![github pages setting]({{site.baseurl}}/assets/img/blog/gh-pages-docs.png)
+
+Finally you should have it deployed on gh-pages like [this](https://peakbreaker.com/docme_pages), 
+with [this repo](https://github.com/peakBreaker/docme_pages)
+
+### Round 3: Sphinx with git submodules
 
 Adding submodules is pretty straight forward
-1. `$ git submodule add <submodule>`
+1. *$ git submodule add \<submodule\>*
 2. Add the docs in the submodule to the rst files
 3. Build and push the new documentation
 
+Why do we do this? Well this is hugely useful if we have build our architecture
+using microservices, and are not using a monorepo - which is common these
+days. I wont go into details here - if you figured out Round 1 and 2 and know how git
+submodules work, then this should be a breeze.
+
 ### Round 4: Deploying docs with OAuth on Heroku
+
+*And checking organization membership*
 
 This blogpost originally came from the desire to update and
 improve the way my company does documentation. Understandably, they and many
@@ -272,7 +319,9 @@ documentation. So for this I will planned the following:
 - Check user organizations using OAuth and check if they are part of whatever
   org to authenticate
 
-**Cool, Lets get started!**
+**Cool, so lets get started!**
+
+#### Building the application
 
 The author of the Flask Dance library had written an [example implementation](https://github.com/singingwolfboy/flask-dance-github)
  of Github OAuth, so I used it to get started. He also provided a very good
@@ -338,7 +387,53 @@ if __name__ == "__main__":
     app.run()
 ```
 
-**What I leared from this:**
-1. Make sure the OAuth scope is correct too see user orgs (notice the line `github_bp = make_github_blueprint(scope='read:org')`)
-2. Use env vars for the client_id and client_secret
-3. Heroku is quite nice for quick app deployments
+Some comments on the code above:
+- Make sure the OAuth scope is correct too see user orgs. Notice the line 
+
+```
+github_bp = make_github_blueprint(scope='read:org')
+```
+
+- Use env vars for the client_id and client_secret 
+
+```
+os.environ.get('<env var>')
+```
+
+- Commit and push to a gh repo
+
+#### Deploying to Heroku
+
+Deploying to Heroku was a breeze once I got into the jazz. The guide on the gh
+repo was very nice to follow, but the basic steps are as follows:
+
+1. Create an account
+2. Press *New->Create new app*
+3. Name the app something fun
+4. Press Connect to github (assuming the app is pushed to your gh)
+5. Select the app
+6. Make sure you have a [Procfile](https://devcenter.heroku.com/articles/procfile), [runtime.txt](https://devcenter.heroku.com/articles/python-runtimes), [app.json](https://devcenter.heroku.com/articles/app-json-schema) and
+   requirements.txt in the repo
+    - Procfile is one line and looks like this
+    `web: gunicorn app:app --log-file=-`
+    - runtime.txt tells heroku the python dist to use, for example is says: "python-3.7.0"
+    - app.json provides heroku with some application meta information
+7. Create a [github OAuth application](https://github.com/settings/applications/new), provide the ClientID and Client Secret to
+   the heroku app using env vars in the heroku console (under application settings)
+8. If done correctly, you should now see the app on your website.  See my [demo](https://peakbreaker-app.herokuapp.com/)
+9. If the auth works, you should be able to just config the flask app to serve
+   the docs as a static directory. I havent done this in the demo, but its no big thing
+
+### Final words
+
+Hopefully you now see that documentation is a large endeavour and that it is
+worth doing right. If you have followed my instructions above, you should be
+atleast a bit familiar with pretty decent documentation stack.
+
+This post became quite long, but I hope you got something out of it. I know
+I did, exploring this topic has been a fun journey.
+
+![AmediaAnders]({{site.baseurl}}/assets/img/blog/amedia_job.jpg)
+
+Best regards from Anders
+
