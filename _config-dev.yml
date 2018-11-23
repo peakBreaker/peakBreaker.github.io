@@ -21,7 +21,7 @@ author-img: anders_profile.jpg # add your photo
 about-author:  Hoping to write code as beautiful as my girlfriend | Data Engineer at <a href="http://www.amedia.no/">Amedia</a>
 
 discus-identifier: peakbreaker-blog # your disqus username
-analytics: UA-117207692-1 # Google Analytics
+analytics: # Google Analytics
 
 # Build settings
 permalink: ':title/'
